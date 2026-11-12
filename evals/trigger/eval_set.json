@@ -1,0 +1,22 @@
+[
+  {"query": "ok i just ran the interaction-audit on our checkout flow and it flagged 6 things (coupon field hidden behind a link, shipping step asks for phone twice, the pay button is below the fold on mobile...). can you turn the top fixes into proposals i can pick from?", "should_trigger": true},
+  {"query": "We're redesigning the Settings screen of our Electron app. Right now everything is one giant scrolling form. Could you propose a better structure, maybe tabs or a left nav? I want to see it before we commit.", "should_trigger": true},
+  {"query": "what would the invoice list look like if we added a bulk-select mode? like checkboxes + a toolbar that appears once you select something", "should_trigger": true},
+  {"query": "Our admin dashboard needs a page for managing API keys - doesn't exist yet. Sketch out what it could look like: list of keys, create, revoke, last used.", "should_trigger": true},
+  {"query": "the search results page has no empty state, no error state and the loading spinner covers everything. propose what each of those should look like, desktop and phone", "should_trigger": true},
+  {"query": "I can't decide how filters should work on the product catalog page: sidebar facets, a filter chips row, or a filter drawer. Lay out the options with pros and cons so the team can vote.", "should_trigger": true},
+  {"query": "here's the design critique our contractor wrote for the onboarding flow (pasted below). which of these would you change and how? show me before/after for the ones worth doing.\n\n1. step indicator is unclear\n2. skip button looks disabled\n3. 'continue' and 'back' swap positions between steps", "should_trigger": true},
+  {"query": "users on the iPad app keep missing the share button in the document viewer, it's buried under the ... menu. propose where it should go", "should_trigger": true},
+  {"query": "our cli tool `deployctl status` prints a wall of text. propose a cleaner layout for the output - grouped by service, with the failing ones on top", "should_trigger": true},
+  {"query": "Brainstorm with me: we want a 'compare two plans' view in the pricing page. Not sure if side-by-side columns or a toggle. Show me a couple of ideas.", "should_trigger": true},
+  {"query": "the disabled state on our primary button fails WCAG contrast (2.1:1). bump it so it passes AA, the color is in src/styles/tokens.css", "should_trigger": false},
+  {"query": "Move the Export button from the toolbar into the More menu under Duplicate in src/components/Toolbar.tsx. we already agreed on it, just do it", "should_trigger": false},
+  {"query": "show me where the click handler for the login button is defined, I think it's somewhere in src/auth", "should_trigger": false},
+  {"query": "the modal on the settings page doesn't close when you press Escape. can you fix it? it's SettingsModal.vue", "should_trigger": false},
+  {"query": "write a spec for the new notifications service: delivery guarantees, retry policy, the database schema and the API endpoints", "should_trigger": false},
+  {"query": "can you change our font from Inter to IBM Plex Sans everywhere and tighten the line-height on body text a bit", "should_trigger": false},
+  {"query": "Our GET /orders endpoint got slow after we added the loyalty tier per order (N+1 query). Propose a few fixes with trade-offs.", "should_trigger": false},
+  {"query": "build the API keys page from the wireframe we agreed on yesterday (docs/mockups/2026-11-10-api-keys.html) in React with our existing Table component", "should_trigger": false},
+  {"query": "make me a bar chart of signups per week from signups.csv, I need it for tomorrow's standup", "should_trigger": false},
+  {"query": "review this PR diff for the navbar refactor and tell me if anything looks wrong - mostly renamed components and moved props", "should_trigger": false}
+]

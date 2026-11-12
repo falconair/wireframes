@@ -1,12 +1,12 @@
 {
-  "name": "wireframe-proposals",
+  "name": "wireframes",
   "description": "Claude Code skill: propose UI changes as cheap Now vs Proposed wireframes.",
   "owner": {
     "name": "Shahbaz Chaudhary"
   },
   "plugins": [
     {
-      "name": "wireframe-proposals",
+      "name": "wireframes",
       "source": "./",
       "description": "Propose UI changes as cheap Now vs Proposed wireframes instead of prose or pixel-perfect mockups."
     }
