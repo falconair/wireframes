@@ -1,0 +1,9 @@
+{
+  "name": "wireframe-proposals",
+  "version": "0.1.0",
+  "description": "Propose UI changes as cheap Now vs Proposed wireframes instead of prose or pixel-perfect mockups.",
+  "author": { "name": "Shahbaz Chaudhary" },
+  "homepage": "https://github.com/falconair/wireframe-proposals",
+  "repository": "https://github.com/falconair/wireframe-proposals",
+  "keywords": ["ui", "ux", "wireframe", "mockup", "design-review", "critique"]
+}

@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recipe Box Fixes</title>
+<style>
+:root{
+  --bg:#f6f5f2; --surface:#ffffff; --fg:#1d1d1b; --muted:#6b6a66; --line:#d9d7d1;
+  --wire:#ecebe7; --wire-strong:#c9c7c0; --accent:#2f6f4f; --accent-soft:#e3efe8;
+  --danger:#b3261e; --danger-soft:#fbe9e7; --warn:#8a5a00; --warn-soft:#fff4dc;
+  --tag:#ece9ff; --tag-fg:#3b3196;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151514; --surface:#1f1f1d; --fg:#ecebe7; --muted:#a3a19b; --line:#3a3936;
+    --wire:#2a2a27; --wire-strong:#4a4945; --accent:#7cc4a0; --accent-soft:#1f3329;
+    --danger:#f2a39b; --danger-soft:#3a1f1c; --warn:#f0c674; --warn-soft:#3a2f17;
+    --tag:#2a2647; --tag-fg:#c9c3ff;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151514; --surface:#1f1f1d; --fg:#ecebe7; --muted:#a3a19b; --line:#3a3936;
+  --wire:#2a2a27; --wire-strong:#4a4945; --accent:#7cc4a0; --accent-soft:#1f3329;
+  --danger:#f2a39b; --danger-soft:#3a1f1c; --warn:#f0c674; --warn-soft:#3a2f17;
+  --tag:#2a2647; --tag-fg:#c9c3ff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:20px;margin:0}
+h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 8px}
+p{margin:6px 0}
+.lede{color:var(--muted);max-width:68ch}
+.summary{width:100%;border-collapse:collapse;margin:20px 0 8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.summary th,.summary td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.summary th{font-size:12px;color:var(--muted);font-weight:600}
+.summary tr:last-child td{border-bottom:0}
+.tablewrap{overflow-x:auto}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;white-space:nowrap}
+.p-now{background:var(--danger-soft);color:var(--danger)}
+.p-next{background:var(--accent-soft);color:var(--accent)}
+.p-decide{background:var(--warn-soft);color:var(--warn)}
+.p-size{background:var(--wire);color:var(--muted)}
+section.fix{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;margin:24px 0}
+.fixhead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.num{font-weight:700;color:var(--muted)}
+.cols{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.col{flex:1 1 280px;min-width:0}
+.decision{border-left:3px solid var(--warn);background:var(--warn-soft);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:14px}
+.decision b{color:var(--warn)}
+ul.tight{margin:4px 0;padding-left:20px}
+ul.tight li{margin:2px 0}
+.cap{font-size:12px;color:var(--muted);margin:6px 0 0;text-align:center}
+.rec{font-size:12px;font-weight:600;color:var(--accent)}
+
+/* wireframes */
+.frames{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;margin-top:6px}
+.frame{background:var(--bg);border:1.5px solid var(--wire-strong);border-radius:8px;overflow:hidden;font-size:12px;position:relative}
+.phone{width:240px;border-radius:22px;padding:10px 0 14px;max-width:100%}
+.desk{width:440px;max-width:100%}
+.bar{display:flex;align-items:center;gap:6px;padding:7px 10px;border-bottom:1px solid var(--line);background:var(--surface)}
+.logo{font-weight:700;font-size:12px;white-space:nowrap}
+.sp{flex:1}
+.search{flex:1;border:1px solid var(--wire-strong);border-radius:6px;padding:3px 7px;color:var(--muted);background:var(--bg);min-width:0;white-space:nowrap;overflow:hidden}
+.btn{border:1px solid var(--wire-strong);border-radius:6px;padding:2px 8px;background:var(--surface);white-space:nowrap}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn.danger{color:var(--danger);border-color:var(--danger)}
+.btn.ghost{border-color:transparent}
+.body{padding:10px}
+.ph{background:var(--wire);border-radius:5px}
+.line{height:7px;background:var(--wire-strong);border-radius:4px;margin:5px 0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.desk .grid{grid-template-columns:repeat(3,1fr)}
+.card .ph{height:46px}
+.card .line{width:70%}
+.skel .ph,.skel .line{background:var(--wire);animation:none}
+.chip{display:inline-block;border:1px solid var(--wire-strong);border-radius:99px;padding:1px 8px;margin:2px 2px 2px 0;background:var(--surface);white-space:nowrap}
+.chip.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.chip.tok{background:var(--tag);border-color:transparent;color:var(--tag-fg)}
+.menu{position:absolute;right:10px;top:34px;background:var(--surface);border:1px solid var(--wire-strong);border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.15);padding:4px 0;width:130px;z-index:2}
+.menu div{padding:4px 10px}
+.menu .sep{border-top:1px solid var(--line);padding:0;margin:4px 0}
+.menu .del{color:var(--danger)}
+.toast{position:absolute;left:10px;right:10px;bottom:10px;background:var(--fg);color:var(--bg);border-radius:6px;padding:6px 9px;display:flex;gap:8px;align-items:center}
+.toast b{color:var(--accent-soft);margin-left:auto;cursor:default}
+.dialog{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}
+.dialog .box{background:var(--surface);border-radius:8px;padding:12px;width:80%}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--wire-strong);border-radius:14px 14px 0 0;padding:10px;box-shadow:0 -6px 18px rgba(0,0,0,.18)}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.3)}
+.banner{border:1px solid var(--warn);background:var(--warn-soft);color:var(--warn);border-radius:6px;padding:6px 8px;margin-bottom:8px;display:flex;gap:6px;align-items:center}
+.empty{text-align:center;padding:26px 10px;color:var(--muted)}
+.ing{display:flex;align-items:center;gap:6px;padding:2px 0}
+.box{width:11px;height:11px;border:1.5px solid var(--wire-strong);border-radius:3px;flex:none}
+.box.on{background:var(--accent);border-color:var(--accent)}
+.strike{text-decoration:line-through;color:var(--muted)}
+.before{opacity:.92}
+.tagline{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
+.tagline.bad{color:var(--danger)} .tagline.good{color:var(--accent)} .tagline.opt{color:var(--tag-fg)}
+.tall{height:330px}
+.sidebar{width:120px;border-right:1px solid var(--line);padding:8px;flex:none}
+.oflow{overflow:hidden}
+footer{color:var(--muted);font-size:13px;margin-top:28px}
+@media (max-width:520px){ .desk{width:100%} .phone{width:100%;max-width:260px} }
+</style>
+</head>
+<body>
+<main>
+<h1>Recipe Box: proposed fixes</h1>
+<p class="lede">Five findings from the critique, each with a proposed fix drawn as a wireframe. Three are ready to build as drawn. Two need a decision from you first (marked in yellow).</p>
+
+<div class="tablewrap">
+<table class="summary">
+<thead><tr><th>#</th><th>Problem</th><th>Proposed fix</th><th>Size</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Delete sits next to Edit and deletes at once, no undo. Two users lost recipes.</td><td>Move Delete into a ⋯ menu, show an Undo toast, keep deleted recipes for 30 days.</td><td><span class="pill p-size">S–M</span></td><td><span class="pill p-now">Do first</span> <span class="pill p-decide">1 question</span></td></tr>
+<tr><td>5</td><td>Blank grid for new users, nothing shown when sync fails, a spinner that covers the page.</td><td>Empty state with Add recipe, a sync-error banner over cached recipes, skeleton cards.</td><td><span class="pill p-size">S</span></td><td><span class="pill p-next">Ready</span></td></tr>
+<tr><td>2</td><td>Search only exists on Home.</td><td>Search box in the header on every screen. Icon that expands on phone.</td><td><span class="pill p-size">S</span></td><td><span class="pill p-next">Ready</span></td></tr>
+<tr><td>3</td><td>40 ingredient checkboxes push the grid off screen on phones.</td><td>Three options drawn. I recommend a Filter sheet with applied filters as chips.</td><td><span class="pill p-size">M</span></td><td><span class="pill p-decide">Pick an option</span></td></tr>
+<tr><td>4</td><td>No shopping list (most requested).</td><td>Tick ingredients on a recipe, add to one list, tick off while shopping.</td><td><span class="pill p-size">L</span></td><td><span class="pill p-decide">Set v1 scope</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 1 -->
+<section class="fix" id="f1">
+  <div class="fixhead"><span class="num">1</span><h2>Make deleting a recipe hard to do by accident, and undoable</h2><span class="pill p-now">Do first</span></div>
+  <p>Two layers of protection. Moving Delete away stops the slip. The Undo toast and a 30-day <i>Recently deleted</i> list fix it when someone slips anyway. A confirm dialog alone is weaker, because people click through dialogs out of habit.</p>
+  <div class="frames">
+    <div>
+      <p class="tagline bad">Today</p>
+      <div class="frame desk before">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="sp"></span><span class="btn">Edit</span><span class="btn">Delete</span></div>
+        <div class="body"><div class="line" style="width:50%;height:10px"></div><div class="ph" style="height:70px;margin:6px 0"></div><div class="line"></div><div class="line" style="width:80%"></div></div>
+      </div>
+      <p class="cap">Same style, side by side, no confirm.</p>
+    </div>
+    <div>
+      <p class="tagline good">Proposed: Delete is in the ⋯ menu</p>
+      <div class="frame desk" style="height:178px">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="sp"></span><span class="btn">Edit</span><span class="btn ghost">⋯</span></div>
+        <div class="menu"><div>Duplicate</div><div>Share</div><div class="sep"></div><div class="del">Delete recipe</div></div>
+        <div class="body"><div class="line" style="width:50%;height:10px"></div><div class="ph" style="height:70px;margin:6px 0"></div><div class="line"></div></div>
+      </div>
+      <p class="cap">Red, separated, one extra click away.</p>
+    </div>
+    <div>
+      <p class="tagline good">Proposed: after deleting</p>
+      <div class="frame desk" style="height:178px">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="search">Search recipes</span></div>
+        <div class="body"><div class="grid"><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div></div></div>
+        <div class="toast">"Lemon tart" deleted <b>Undo</b> <span>✕</span></div>
+      </div>
+      <p class="cap">Toast stays 10 s and has its own Close. Recipe can also be restored from Settings › Recently deleted for 30 days.</p>
+    </div>
+  </div>
+  <div class="decision"><b>Your call:</b> also add a confirm dialog on top of Undo? I'd skip it; Undo plus Recently deleted covers it without an extra click every time. Separately: if today's delete is a hard delete, check whether a backup can bring back the two lost recipes.</div>
+</section>
+
+<!-- 5 -->
+<section class="fix" id="f5">
+  <div class="fixhead"><span class="num">5</span><h2>Give the recipe grid loading, empty and error states</h2><span class="pill p-next">Ready</span></div>
+  <div class="frames">
+    <div>
+      <p class="tagline good">Loading</p>
+      <div class="frame phone">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="sp"></span><span>⌕</span></div>
+        <div class="body skel"><div class="grid">
+          <div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div>
+          <div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div>
+        </div></div>
+      </div>
+      <p class="cap">Grey skeleton cards. Header and search stay usable.</p>
+    </div>
+    <div>
+      <p class="tagline good">Empty (new user)</p>
+      <div class="frame phone">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="sp"></span><span>⌕</span></div>
+        <div class="empty"><div class="ph" style="width:56px;height:56px;margin:0 auto 10px;border-radius:50%"></div><b style="color:var(--fg)">No recipes yet</b><p>Add one by hand or paste a link to a recipe page.</p><p><span class="btn primary">Add recipe</span></p></div>
+      </div>
+      <p class="cap">Says what goes here and gives the one action.</p>
+    </div>
+    <div>
+      <p class="tagline good">Sync failed</p>
+      <div class="frame phone">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="sp"></span><span>⌕</span></div>
+        <div class="body">
+          <div class="banner">Couldn't sync. Showing recipes saved on this device.<span class="sp"></span><span class="btn">Retry</span></div>
+          <div class="grid"><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div></div>
+        </div>
+      </div>
+      <p class="cap">Cached recipes stay visible; the banner explains and offers Retry.</p>
+    </div>
+  </div>
+  <p style="margin-top:12px">Also: "no results" for a search or filter gets its own message ("No recipes match <i>chicken + lime</i>. Clear filters"), so it is never confused with an empty box.</p>
+</section>
+
+<!-- 2 -->
+<section class="fix" id="f2">
+  <div class="fixhead"><span class="num">2</span><h2>Search from every screen</h2><span class="pill p-next">Ready</span></div>
+  <p>Move the search box from the Home page into the header, so it is in the same place on Home, a Recipe page and Settings. Searching from a Recipe page takes you to Home with results. The <kbd>/</kbd> key focuses it on desktop.</p>
+  <div class="frames">
+    <div>
+      <p class="tagline good">Desktop: Recipe page</p>
+      <div class="frame desk">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="search">Search recipes  /</span><span class="btn">Edit</span><span class="btn ghost">⋯</span></div>
+        <div class="body"><div class="line" style="width:50%;height:10px"></div><div class="ph" style="height:60px;margin:6px 0"></div><div class="line"></div><div class="line" style="width:70%"></div></div>
+      </div>
+    </div>
+    <div>
+      <p class="tagline good">Phone: tap ⌕, field takes the header</p>
+      <div class="frame phone">
+        <div class="bar"><span>←</span><span class="search">Search recipes</span><span class="btn ghost">Cancel</span></div>
+        <div class="body"><p style="color:var(--muted);margin:0 0 6px">Recent</p><div class="line" style="width:60%"></div><div class="line" style="width:45%"></div><div class="line" style="width:55%"></div></div>
+      </div>
+      <p class="cap">Cancel closes it and returns to the recipe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="fix" id="f3">
+  <div class="fixhead"><span class="num">3</span><h2>Ingredient filter that fits on a phone</h2><span class="pill p-decide">Pick an option</span></div>
+  <p>All three are drawn at phone width. On desktop each one can keep a sidebar, but collapsed and with a search box at the top, not 40 open checkboxes.</p>
+  <div class="frames">
+    <div>
+      <p class="tagline opt">A. Chips row</p>
+      <div class="frame phone tall oflow">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="search">Search</span></div>
+        <div class="body">
+          <div style="white-space:nowrap;overflow:hidden;margin-bottom:8px"><span class="chip on">Chicken</span><span class="chip">Rice</span><span class="chip">Egg</span><span class="chip">Tomato</span><span class="chip">+36</span></div>
+          <div class="grid"><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div></div>
+        </div>
+      </div>
+      <p class="cap">+ Quick for the top 8 ingredients.<br>− The other 32 hide behind "+36" anyway.</p>
+    </div>
+    <div>
+      <p class="tagline opt">B. Filter sheet <span class="rec">· recommended</span></p>
+      <div class="frame phone tall oflow">
+        <div class="bar"><span class="logo">Recipe Box</span><span class="search">Search</span><span class="btn">Filter · 2</span></div>
+        <div class="body">
+          <div style="margin-bottom:8px"><span class="chip on">Chicken ✕</span><span class="chip on">Lime ✕</span></div>
+          <div class="grid"><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div></div>
+        </div>
+        <div class="scrim"></div>
+        <div class="sheet">
+          <div style="display:flex;align-items:center;margin-bottom:6px"><b>Ingredients</b><span class="sp"></span><span class="btn ghost">✕ Close</span></div>
+          <div class="search" style="margin-bottom:6px">Find ingredient</div>
+          <div class="ing"><span class="box on"></span>Chicken</div><div class="ing"><span class="box on"></span>Lime</div><div class="ing"><span class="box"></span>Rice</div><div class="ing"><span class="box"></span>Garlic</div>
+          <div style="display:flex;gap:6px;margin-top:8px"><span class="btn">Clear</span><span class="btn primary" style="flex:1;text-align:center">Show 6 recipes</span></div>
+        </div>
+      </div>
+      <p class="cap">+ Scales to any number; searchable; result count before closing.<br>− One tap more to open.</p>
+    </div>
+    <div>
+      <p class="tagline opt">C. Type it in search</p>
+      <div class="frame phone tall oflow">
+        <div class="bar"><span class="logo">Recipe Box</span></div>
+        <div class="body">
+          <div class="search" style="margin-bottom:4px;white-space:normal"><span class="chip tok">with: chicken</span> lim|</div>
+          <div style="border:1px solid var(--wire-strong);border-radius:6px;background:var(--surface);padding:4px 7px;margin-bottom:8px"><div>Ingredient: <b>lime</b></div><div>Recipe: Key lime pie</div></div>
+          <div class="grid"><div class="card"><div class="ph"></div><div class="line"></div></div><div class="card"><div class="ph"></div><div class="line"></div></div></div>
+        </div>
+      </div>
+      <p class="cap">+ No extra UI at all.<br>− Hard to discover; people won't know they can.</p>
+    </div>
+  </div>
+  <div class="decision"><b>Your call:</b> A, B or C? I recommend <b>B</b>: it handles 40+ ingredients, the applied filters stay visible as chips you can remove, and it has an obvious Close. C can be added later on top of B as a shortcut.</div>
+</section>
+
+<!-- 4 -->
+<section class="fix" id="f4">
+  <div class="fixhead"><span class="num">4</span><h2>Shopping list</h2><span class="pill p-decide">Set v1 scope</span></div>
+  <div class="frames">
+    <div>
+      <p class="tagline good">On a recipe</p>
+      <div class="frame phone">
+        <div class="bar"><span>←</span><span class="logo">Lemon tart</span><span class="sp"></span><span>⌕</span><span class="btn ghost">⋯</span></div>
+        <div class="body">
+          <p style="margin:0 0 4px"><b>Ingredients</b></p>
+          <div class="ing"><span class="box on"></span>3 lemons</div><div class="ing"><span class="box"></span>200 g flour</div><div class="ing"><span class="box on"></span>100 g butter</div><div class="ing"><span class="box"></span>2 eggs</div>
+          <p style="margin:8px 0 0"><span class="btn primary" style="display:block;text-align:center">Add 2 to shopping list</span></p>
+          <p style="color:var(--muted);margin:4px 0 0;font-size:11px;text-align:center">Tick what you need to buy</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="tagline good">The list</p>
+      <div class="frame phone">
+        <div class="bar"><span>←</span><span class="logo">Shopping list</span><span class="sp"></span><span class="btn ghost">Clear ticked</span></div>
+        <div class="body">
+          <p style="margin:0;color:var(--muted)">Lemon tart</p>
+          <div class="ing"><span class="box on"></span><span class="strike">3 lemons</span></div><div class="ing"><span class="box"></span>100 g butter</div>
+          <p style="margin:6px 0 0;color:var(--muted)">Chicken & lime rice</p>
+          <div class="ing"><span class="box"></span>2 limes</div><div class="ing"><span class="box"></span>500 g chicken thighs</div>
+          <div class="ing" style="color:var(--muted)">+ Add item</div>
+        </div>
+      </div>
+      <p class="cap">Reached from a header icon with a count on every screen.</p>
+    </div>
+    <div class="col" style="flex:1 1 240px">
+      <h3>Proposed v1</h3>
+      <ul class="tight">
+        <li>Tick ingredients on a recipe, add them to one list</li>
+        <li>List grouped by recipe; tick off while shopping; Clear ticked</li>
+        <li>Add a free-text item (milk, bin bags)</li>
+        <li>Synced like recipes, so it is on your phone in the shop</li>
+      </ul>
+      <h3>Left for later</h3>
+      <ul class="tight">
+        <li>Merging duplicates (3 lemons + 2 lemons = 5). Needs quantity and unit parsing, which is the hard part</li>
+        <li>Grouping by aisle</li>
+        <li>Sharing a list with someone else</li>
+      </ul>
+    </div>
+  </div>
+  <div class="decision"><b>Your call:</b> is v1 without duplicate merging good enough to ship? If users mostly cook one or two recipes a week, yes; if they plan whole weeks, merging may be what they are actually asking for.</div>
+</section>
+
+<footer>Wireframes only: layout and behaviour, not final styling. Nothing has been built yet.</footer>
+</main>
+</body>
+</html>
