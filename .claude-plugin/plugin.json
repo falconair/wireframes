@@ -1,7 +1,7 @@
 {
   "name": "wireframes",
   "version": "0.1.0",
-  "description": "Propose UI changes as cheap Now vs Proposed wireframes instead of prose or pixel-perfect mockups.",
+  "description": "An agent skill that proposes UI changes as cheap Now vs Proposed wireframes instead of prose. A picture is worth a thousand words.",
   "author": {
     "name": "Shahbaz Chaudhary"
   },

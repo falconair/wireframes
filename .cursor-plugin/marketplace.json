@@ -1,0 +1,13 @@
+{
+  "name": "wireframes",
+  "owner": {
+    "name": "Shahbaz Chaudhary"
+  },
+  "plugins": [
+    {
+      "name": "wireframes",
+      "source": "./",
+      "description": "An agent skill that proposes UI changes as cheap Now vs Proposed wireframes instead of prose. A picture is worth a thousand words."
+    }
+  ]
+}

@@ -25,43 +25,42 @@ already decided on.
 
 ## Install
 
-It's a standard [Agent Skill](https://agentskills.io): one folder, `skills/wireframes/`, with
-a `SKILL.md` and a `kit.html`. Any agent that supports skills can use it.
+It's a standard [Agent Skill](https://agentskills.io): one folder, `skills/wireframes/`, with a
+`SKILL.md` and a `kit.html`. The repo is also a plugin for the agents that have plugin
+systems, so most agents can install it with one command.
 
-### Claude Code
+| Agent | Install | Tested |
+|---|---|---|
+| Claude Code | `/plugin marketplace add falconair/wireframes`<br>`/plugin install wireframes@wireframes` | ✓ |
+| Gemini CLI | `gemini skills install https://github.com/falconair/wireframes.git --path skills/wireframes` | ✓ |
+| GitHub Copilot CLI | `copilot plugin install falconair/wireframes` | |
+| VS Code (Copilot) | Command Palette → **Chat: Install Plugin from Source** → `https://github.com/falconair/wireframes` | |
+| Codex | `codex plugin marketplace add falconair/wireframes`, then install **wireframes** from `/plugins` | |
+| Cursor | **Customize** → **From GitHub Repository** → `https://github.com/falconair/wireframes` | |
+| Antigravity CLI | `agy plugin install https://github.com/falconair/wireframes` | |
 
+The untested rows follow each agent's documentation as of November 2026. If one doesn't
+work for you, please [open an issue](https://github.com/falconair/wireframes/issues).
+
+### Any agent that reads skills
+
+These installers put the skill wherever your agent looks for it:
+
+```bash
+gh skill install falconair/wireframes wireframes --agent <agent> --scope user   # GitHub CLI 2.90+
+npx skills add falconair/wireframes -g                                          # vercel-labs/skills
 ```
-/plugin marketplace add falconair/wireframes
-/plugin install wireframes@wireframes
-```
 
-Or copy `skills/wireframes/` into `~/.claude/skills/`.
-
-### Codex, Gemini CLI, GitHub Copilot, Cursor, OpenCode
-
-These all read skills from `~/.agents/skills/` (for you) or `.agents/skills/` (for one project):
+Or copy it by hand. Codex, Gemini CLI, Copilot, Cursor and OpenCode all read
+`~/.agents/skills/`:
 
 ```bash
 git clone https://github.com/falconair/wireframes /tmp/wireframes
-mkdir -p ~/.agents/skills
-cp -R /tmp/wireframes/skills/wireframes ~/.agents/skills/
+mkdir -p ~/.agents/skills && cp -R /tmp/wireframes/skills/wireframes ~/.agents/skills/
 ```
 
-Each agent also has a folder of its own if you prefer it:
-
-| Agent | Your skills | One project's skills |
-|---|---|---|
-| Codex | `~/.agents/skills/` | `.agents/skills/` |
-| Gemini CLI | `~/.gemini/skills/` | `.gemini/skills/` |
-| GitHub Copilot (CLI, VS Code) | `~/.copilot/skills/` | `.github/skills/` |
-| Cursor | `~/.cursor/skills/` | `.cursor/skills/` |
-| OpenCode | `~/.config/opencode/skills/` | `.opencode/skills/` |
-
-### Any other agent
-
-Copy `skills/wireframes/` into wherever your agent loads skills from. If it doesn't support
-skills, paste the contents of `SKILL.md` into its instructions and keep `kit.html` next to
-them. The skill only needs to read `kit.html` and write one HTML file.
+If your agent doesn't support skills at all, paste `SKILL.md` into its instructions and keep
+`kit.html` next to it. The skill only needs to read `kit.html` and write one HTML file.
 
 ## Where the pictures go
 
@@ -83,6 +82,8 @@ other skill or plugin.
 - `evals-trigger/`: 20 short prompts (10 that should fire the skill, 10 near misses) that
   check only whether it fires:
   `claude plugin eval . --eval-dir evals-trigger --ablation none --no-publish`.
+- `PUBLISHING.md`: for the maintainer, how to release a new version and where the skill
+  is listed.
 - `tests/recipe-box/`: the first hand-run test, with the critique it was given and the
   outputs with and without the skill.
 
