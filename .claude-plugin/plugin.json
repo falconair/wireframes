@@ -15,5 +15,8 @@
     "design-review",
     "critique"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "privacyPolicyUrl": "https://github.com/falconair/wireframes/blob/main/PRIVACY.md",
+  "documentationUrl": "https://github.com/falconair/wireframes#readme",
+  "supportUrl": "https://github.com/falconair/wireframes/issues"
 }
