@@ -46,13 +46,13 @@ Antigravity's `displayName` and `logo`) belong in that agent's own manifest fold
 
 | Where | How to get listed | Needs | Status |
 |---|---|---|---|
-| GitHub (falconair/wireframes) | public repo | | live, v0.1.0 released |
+| GitHub (falconair/wireframes) | public repo | | live, v0.1.2 released |
 | Claude Code marketplace in this repo | `/plugin marketplace add falconair/wireframes` | `.claude-plugin/` | live, tested |
 | Gemini CLI extensions gallery | automatic: the crawler picks up repos with the `gemini-cli-extension` topic once a day | root `gemini-extension.json` | topic added |
 | skills.sh | automatic: ranked by installs through the vercel-labs/skills installer | nothing | appears once people install it |
 | shahbazac.com | card in `_data/open_source.yml` | | live |
 | falconair/skills gallery | add an entry | | to do |
-| Anthropic plugin directory (claude.ai, Cowork, Claude Code) | submit at [claude.ai/directory/manage](https://claude.ai/directory/manage). Don't open PRs to anthropics/claude-plugins-official; they aren't monitored | paid claude.ai plan; `claude plugin validate --strict` passes; safety and policy review | submitted 2026-11-12 (security scan, then human review); status at claude.ai/directory/manage |
+| Anthropic plugin directory (claude.ai, Cowork, Claude Code) | submit at [claude.ai/directory/manage](https://claude.ai/directory/manage). Don't open PRs to anthropics/claude-plugins-official; they aren't monitored | paid claude.ai plan; `claude plugin validate --strict` passes; safety and policy review | v0.1.0 refused by the policy scan (non-text files); v0.1.2 passed the scan and publishing was requested 2026-11-21, now waiting for a human reviewer. One warning remains: "download-and-run command · README.md" (the page doesn't say which line). Status at claude.ai/directory/manage |
 | OpenAI plugin directory (ChatGPT, Codex) | upload a ZIP of the repo at [platform.openai.com/plugins](https://platform.openai.com/plugins) and choose "Skills only"; it converts `.claude-plugin/plugin.json` | verified identity; review; no hooks | blocked 2026-11-12: OpenAI isn't accepting skills-only submissions, and rejects "wireframes" as too generic a name. Draft left unpublished; Codex users install from GitHub |
 | Cursor Marketplace | submit the repo at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish); every plugin is reviewed by hand | open source, README, kebab-case name, valid manifest | optional; installs from GitHub already work |
 | github/awesome-copilot (the default Copilot CLI and VS Code marketplace) | the "external plugin" issue form in that repo; don't edit `external.json` in a PR | release tag plus full commit SHA, licence, root `plugin.json`, an install smoke test | ready to apply (v0.1.0 is tagged) |
@@ -62,5 +62,13 @@ Antigravity's `displayName` and `logo`) belong in that agent's own manifest fold
 
 Anthropic's directory holds or refuses a version whose files contain a download-and-run
 command, even in documentation. Link to the tool's own install instructions instead.
+v0.1.2 still carries that warning on README.md, with the `npx` line already gone. The page
+doesn't name the line. The likeliest causes, in order: the `git clone … && cp -R` block, then
+the URL installers (`gemini skills install https://…`, `agy plugin install https://…`). Plugins
+listed before about 2026-11-05 have the same kinds of lines, but they went through an older,
+more lenient rule. If the reviewer refuses, keep the `/plugin` lines and point every other
+agent to its own install docs. Since November, accounts that aren't Verified also get
+refusals that ask for a Verified organization (anthropics/claude-plugins-official#7024), and
+there's no documented way yet for one person to get Verified.
 
 Directory rules change often. Check each one's current submission page before applying.
