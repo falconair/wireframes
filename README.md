@@ -61,8 +61,10 @@ These installers put the skill wherever your agent looks for it:
 
 ```bash
 gh skill install falconair/wireframes wireframes --agent <agent> --scope user   # GitHub CLI 2.90+
-npx skills add falconair/wireframes -g                                          # vercel-labs/skills
 ```
+
+The [vercel-labs/skills](https://github.com/vercel-labs/skills) installer also works: follow
+its instructions and give it the repo `falconair/wireframes`.
 
 Or copy it by hand. Codex, Gemini CLI, Copilot, Cursor and OpenCode all read
 `~/.agents/skills/`:

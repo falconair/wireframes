@@ -49,7 +49,7 @@ Antigravity's `displayName` and `logo`) belong in that agent's own manifest fold
 | GitHub (falconair/wireframes) | public repo | | live, v0.1.0 released |
 | Claude Code marketplace in this repo | `/plugin marketplace add falconair/wireframes` | `.claude-plugin/` | live, tested |
 | Gemini CLI extensions gallery | automatic: the crawler picks up repos with the `gemini-cli-extension` topic once a day | root `gemini-extension.json` | topic added |
-| skills.sh | automatic: ranked by `npx skills` install counts | nothing | appears once people install it |
+| skills.sh | automatic: ranked by installs through the vercel-labs/skills installer | nothing | appears once people install it |
 | shahbazac.com | card in `_data/open_source.yml` | | live |
 | falconair/skills gallery | add an entry | | to do |
 | Anthropic plugin directory (claude.ai, Cowork, Claude Code) | submit at [claude.ai/directory/manage](https://claude.ai/directory/manage). Don't open PRs to anthropics/claude-plugins-official; they aren't monitored | paid claude.ai plan; `claude plugin validate --strict` passes; safety and policy review | submitted 2026-11-12 (security scan, then human review); status at claude.ai/directory/manage |
@@ -59,5 +59,8 @@ Antigravity's `displayName` and `logo`) belong in that agent's own manifest fold
 | Antigravity Marketplace | the partner intake form linked from antigravity.google/docs/build-plugins, after `agy plugin validate --strict` passes | `displayName`, `logo`, `author` in an Antigravity manifest; README | optional; installs from GitHub already work |
 | hesreallyhim/awesome-claude-code | issue form only, no PRs | repo at least 14 days old with ongoing commits, or 100+ stars | eligible from 2026-11-26 |
 | VoltAgent/awesome-agent-skills | PR titled `Add skill: falconair/wireframes` | evidence of real community use; brand-new skills are turned down | later |
+
+Anthropic's directory holds or refuses a version whose files contain a download-and-run
+command, even in documentation. Link to the tool's own install instructions instead.
 
 Directory rules change often. Check each one's current submission page before applying.
