@@ -26,11 +26,16 @@ Antigravity's `displayName` and `logo`) belong in that agent's own manifest fold
    claude plugin validate --strict .
    gemini extensions validate .
    ```
-3. Run the evals (Claude Code; about $5 for both suites):
+3. Run the evals from a sibling checkout of
+   [falconair/wireframes-evals](https://github.com/falconair/wireframes-evals) (Claude Code;
+   about $5 for both suites):
    ```bash
-   claude plugin eval . --allow-tools Write Edit Bash --scaffold --no-publish
-   claude plugin eval . --eval-dir evals-trigger --ablation none --no-publish
+   cd ../wireframes-evals
+   PLUGIN=../wireframes ./run.sh           # behaviour, with and without the plugin
+   PLUGIN=../wireframes ./run.sh trigger   # trigger-only prompts
    ```
+   The suite is in its own repo because Anthropic's directory accepts only Markdown, text,
+   JSON, YAML and images inside a plugin, unless the publisher is a Verified organization.
 4. Commit, then tag and release:
    ```bash
    git tag v0.1.0 && git push origin v0.1.0

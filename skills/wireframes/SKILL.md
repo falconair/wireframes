@@ -24,8 +24,8 @@ One self-contained HTML file, built like this:
 1. **Path:** `docs/mockups/YYYY-MM-DD-<topic>.html` in the project, so mockups are kept
    with the code and can be committed. If the project already keeps mockups in another
    `mockups/` folder, use that one instead.
-2. **Head:** copy everything from `<!doctype html>` to `</style></head><body>` in
-   [kit.html](kit.html) verbatim. Change only `<title>`. Use kit classes only. Inline
+2. **Head:** copy the "Head" code block in [kit.md](kit.md) verbatim, from `<!doctype html>`
+   to `</style></head><body>`. Change only `<title>`. Use kit classes only. Inline
    `style` is for size and spacing (width, height, margin, a `.menu`'s position), never colour.
 3. `<h1>` and a one-line `.lede`.
 4. One section per change: `<h2>N · outcome in the user's words</h2>`, then one layout:
@@ -41,7 +41,7 @@ One self-contained HTML file, built like this:
    frames, and one `.why` sentence. Use two frames on one side when the change is a sequence
    (menu, then the toast after it).
 
-Read [kit.html](kit.html) once: below the CSS it has a worked example of each layout and an
+Read [kit.md](kit.md) once: after the head it has a worked example of each layout and an
 index of every class.
 
 ## Drawing rules

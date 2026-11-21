@@ -1,6 +1,6 @@
 # Privacy
 
-wireframes is a set of instructions (`SKILL.md`) and a stylesheet (`kit.html`) for coding
+wireframes is a set of instructions (`SKILL.md`) and a stylesheet kit (`kit.md`) for coding
 agents. It has no server, no account and no analytics.
 
 - **It collects nothing.** The skill doesn't read personal data and doesn't ask the agent to.

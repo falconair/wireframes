@@ -39,7 +39,7 @@ already decided on.
 ## Install
 
 It's a standard [Agent Skill](https://agentskills.io): one folder, `skills/wireframes/`, with a
-`SKILL.md` and a `kit.html`. The repo is also a plugin for the agents that have plugin
+`SKILL.md` and a `kit.md`. The repo is also a plugin for the agents that have plugin
 systems, so most agents can install it with one command.
 
 | Agent | Install | Tested |
@@ -73,7 +73,7 @@ mkdir -p ~/.agents/skills && cp -R /tmp/wireframes/skills/wireframes ~/.agents/s
 ```
 
 If your agent doesn't support skills at all, paste `SKILL.md` into its instructions and keep
-`kit.html` next to it. The skill only needs to read `kit.html` and write one HTML file.
+`kit.md` next to it. The skill only needs to read `kit.md` and write one HTML file.
 
 ## Where the pictures go
 
@@ -87,18 +87,15 @@ other skill or plugin.
 
 - `skills/wireframes/SKILL.md`: what to draw, the size budget, how to check the page, and
   how to hand it over.
-- `skills/wireframes/kit.html`: about 4 KB of fixed CSS that gets copied verbatim, plus
+- `skills/wireframes/kit.md`: about 4 KB of fixed CSS that gets copied verbatim, plus
   one worked example of each layout.
-- `evals/`: a `claude plugin eval` suite (Claude Code) with
-  four layout cases and two cases where the skill shouldn't fire:
-  `claude plugin eval . --allow-tools Write Edit Bash --scaffold --no-publish`.
-- `evals-trigger/`: 20 short prompts (10 that should fire the skill, 10 near misses) that
-  check only whether it fires:
-  `claude plugin eval . --eval-dir evals-trigger --ablation none --no-publish`.
 - `PUBLISHING.md`: for the maintainer, how to release a new version and where the skill
   is listed.
-- `tests/recipe-box/`: the first hand-run test, with the critique it was given and the
-  outputs with and without the skill.
+- `PRIVACY.md`: what the skill collects and sends (nothing).
+
+The test suite (six `claude plugin eval` cases and 20 trigger prompts) lives in
+[falconair/wireframes-evals](https://github.com/falconair/wireframes-evals), so this repo
+holds only what you install.
 
 ## Licence
 

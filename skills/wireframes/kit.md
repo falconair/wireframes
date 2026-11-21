@@ -1,3 +1,12 @@
+# Wireframe kit
+
+Every mockup starts with the head below, copied verbatim: everything from `<!doctype html>`
+to `</style></head><body>`. Change only the `<title>`. Then write the sections and close
+with `</body></html>`.
+
+## Head (copy verbatim)
+
+```html
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Proposed changes</title>
@@ -32,21 +41,13 @@ h1{font-size:18px;margin:0 0 4px}h2{font-size:15px;margin:28px 0 8px}.lede{color
 .bad{outline:2px dashed var(--bad);outline-offset:2px}.good{outline:2px solid var(--good);outline-offset:2px}
 .n{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--a);color:#fff;font:700 10px system-ui}
 </style></head><body>
-<!-- Everything above </style> is copied verbatim. Below: one worked example per layout. Replace, don't copy. -->
-<!-- CLASS INDEX (do not copy into output)
-Page: h1 .lede h2 · layouts .pair .opts .solo .strip · labels .lbl (.b Now, .g Proposed, .o option)
-Frames: .f (desktop/web) .phone (narrow or native) .bar (header/toolbar row; .sp pushes items right) .pad
-Content: .box (grey text line; set width) .img (grey image/chart) .row (list row) .grid (3-up cards)
-  .body + .col + .grow (side-by-side panes)
-Text: .wm (app name) .ctx/.mut (grey) .lk (link) .mono (code/terminal) .red (destructive)
-Controls: .btn (.pri primary, .dim disabled, .red destructive) .in (input) .chk (.on) checkbox
-  .chip (.on) .av (avatar circle)
-Overlays: .menu (absolute, under a .bar; frame needs room) .sheet (absolute, bottom of .phone)
-  .dlg (dialog drawn in-flow inside the frame) .toast .hint (inline notice) .hl (highlighted row)
-Notes: .note (grey caption inside a frame) .why (sentence under a frame) .n (numbered callout)
-Marks: .bad (red dashed: the problem) .good (green solid: the change)
--->
+```
 
+## Worked examples
+
+One example of each layout. Read them for the markup pattern; don't copy their content.
+
+```html
 <h1>Proposed changes: wireframes</h1>
 <p class="lede">Red dashed = the problem, green = the change. Grey bars are content that stays as is.</p>
 
@@ -79,4 +80,18 @@ Marks: .bad (red dashed: the problem) .good (green solid: the change)
 <div><p class="lbl">Error</p><div class="f"><div class="pad"><div class="hint">Can't reach server. <span class="lk">Retry</span></div><div class="box"></div></div></div></div>
 </div>
 <p class="why">Error keeps the cached list visible under the notice.</p>
-</body></html>
+```
+
+## Class index
+
+- Page: h1 .lede h2 · layouts .pair .opts .solo .strip · labels .lbl (.b Now, .g Proposed, .o option)
+- Frames: .f (desktop/web) .phone (narrow or native) .bar (header/toolbar row; .sp pushes items right) .pad
+- Content: .box (grey text line; set width) .img (grey image/chart) .row (list row) .grid (3-up cards)
+  .body + .col + .grow (side-by-side panes)
+- Text: .wm (app name) .ctx/.mut (grey) .lk (link) .mono (code/terminal) .red (destructive)
+- Controls: .btn (.pri primary, .dim disabled, .red destructive) .in (input) .chk (.on) checkbox
+  .chip (.on) .av (avatar circle)
+- Overlays: .menu (absolute, under a .bar; frame needs room) .sheet (absolute, bottom of .phone)
+  .dlg (dialog drawn in-flow inside the frame) .toast .hint (inline notice) .hl (highlighted row)
+- Notes: .note (grey caption inside a frame) .why (sentence under a frame) .n (numbered callout)
+- Marks: .bad (red dashed: the problem) .good (green solid: the change)

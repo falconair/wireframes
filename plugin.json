@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wireframes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An agent skill that proposes UI changes as cheap Now vs Proposed wireframes instead of prose. A picture is worth a thousand words.",
   "author": {
     "name": "Shahbaz Chaudhary",
